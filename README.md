@@ -7,6 +7,7 @@ A app to order pizzas
 ## Technologies
 
 - React
+- React Router v6.4
 - Vite
 - TypeScript
 - Tailwind CSS
