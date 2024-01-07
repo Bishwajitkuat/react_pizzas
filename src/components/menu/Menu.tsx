@@ -1,10 +1,17 @@
 import { useLoaderData } from "react-router-dom";
 import { MenuType, getMenu } from "../../lib/restaurant_api";
+import MenuCard from "./MenuCard";
 
 export default function Menu() {
   const menusData = useLoaderData();
-  console.log(menusData);
-  return <div>Menu</div>;
+  return (
+    <div>
+      {Array.isArray(menusData) &&
+        menusData.map((pizza: MenuType) => (
+          <MenuCard key={pizza.id} menu={pizza}></MenuCard>
+        ))}
+    </div>
+  );
 }
 
 // loader fucntion which fetch data and return data, these data can be as a value of loader property of route object.
