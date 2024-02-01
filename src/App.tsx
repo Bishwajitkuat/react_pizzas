@@ -6,11 +6,15 @@ import Order from "./components/order/Order";
 import Layout from "./components/Layout";
 import { getMenu } from "./lib/restaurant_api";
 import Menu from "./components/menu/Menu";
+import Error from "./components/Error";
 
 const router = createBrowserRouter([
   {
     // layout route
     element: <Layout />,
+    // this component will be rendered if error occures due to routes
+    errorElement: <Error />,
+
     children: [
       {
         path: "/",
@@ -20,6 +24,7 @@ const router = createBrowserRouter([
         path: "/menu",
         element: <Menu />,
         loader: getMenu,
+        errorElement: <Error />,
       },
       {
         path: "/cart",

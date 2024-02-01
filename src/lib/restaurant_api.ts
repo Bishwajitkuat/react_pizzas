@@ -13,7 +13,7 @@ export interface MenuType {
 // this function call will fetch all data and return array of objects
 export async function getMenu(): Promise<MenuType[]> {
   const res = await fetch(`${API_URL}/menu`);
-  if (!res.ok) throw Error("Failed getting menu");
+  if (!res.ok) throw Error("Failed to fetch menu data!");
 
   const { data }: { data: MenuType[] } = await res.json();
   return data;
