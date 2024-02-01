@@ -20,10 +20,10 @@ export async function getMenu(): Promise<MenuType[]> {
 }
 
 // get order by id
-export async function getOrder(id: number) {
+export async function getOrder({ params }) {
+  const id = await params.orderId;
   const res = await fetch(`${API_URL}/order/${id}`);
-  if (!res.ok) throw Error(`Couldn't find order #${id}`);
-
+  if (!res.ok) throw Error(`Couldn't find order #${id} `);
   const { data } = await res.json();
   return data;
 }
