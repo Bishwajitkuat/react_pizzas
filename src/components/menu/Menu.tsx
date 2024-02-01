@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { MenuType, getMenu } from "../../lib/restaurant_api";
+import { MenuType } from "../../lib/restaurant_api";
 import MenuCard from "./MenuCard";
 
 export default function Menu() {
@@ -15,7 +15,7 @@ export default function Menu() {
 }
 
 // loader fucntion which fetch data and return data, these data can be as a value of loader property of route object.
-export const menuLoader = async (): Promise<MenuType[]> => {
-  const menus = await getMenu();
-  return menus;
-};
+// export const menuLoader = async (): Promise<MenuType[]> => {
+//   const menus = await getMenu();
+//   return menus;
+// };
