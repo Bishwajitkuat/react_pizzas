@@ -1,4 +1,5 @@
 const API_URL = "https://react-fast-pizza-api.onrender.com/api";
+import { redirect } from "react-router-dom";
 
 // interface for the each menu object
 export interface MenuType {
@@ -29,11 +30,18 @@ export async function getOrder({ params }) {
 }
 
 // placeing a new order
-export async function createOrder(newOrder) {
+export async function createOrder({ request }) {
   try {
+    const formData = await request.formData();
+    const orderData = Object.fromEntries(formData);
+    const order = {
+      ...orderData,
+      cart: JSON.parse(orderData.cart),
+      priority: orderData.priority === "on",
+    };
     const res = await fetch(`${API_URL}/order`, {
       method: "POST",
-      body: JSON.stringify(newOrder),
+      body: JSON.stringify(order),
       headers: {
         "Content-Type": "application/json",
       },
@@ -41,7 +49,8 @@ export async function createOrder(newOrder) {
 
     if (!res.ok) throw Error();
     const { data } = await res.json();
-    return data;
+    // redirecting to order page by redirect function profided by react-router
+    return redirect(`/order/${data.id}`);
   } catch {
     throw Error("Failed creating your order");
   }
