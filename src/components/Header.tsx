@@ -12,10 +12,10 @@ export default function Header() {
           <Link to="/menu">Menu</Link>
         </li>
         <li>
-          <Link to="/order/new">Order</Link>
+          <Link to="/cart">Cart</Link>
         </li>
         <li>
-          <Link to="/cart">Cart</Link>
+          <Link to="/order/:oderId">Orders</Link>
         </li>
       </ul>
     </header>
