@@ -1,4 +1,4 @@
-import { Form, useNavigation } from "react-router-dom";
+import { Form, useActionData, useNavigation } from "react-router-dom";
 
 const fakeCart = [
   {
@@ -27,6 +27,8 @@ const fakeCart = [
 export default function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+  // accessing return data from action fuction
+  const actionData = useActionData() as { phone?: string };
   const cart = fakeCart;
 
   return (
@@ -44,6 +46,7 @@ export default function CreateOrder() {
           <div>
             <input type="tel" name="phone" required />
           </div>
+          {actionData?.phone && <p>{actionData.phone}</p>}
         </div>
 
         <div>
