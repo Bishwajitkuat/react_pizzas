@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import SearchIcon from "../ui/icons/SearchIcon";
 
 export default function SearchOrder() {
   const [orderId, setOrderId] = useState<string>("");
@@ -13,18 +14,23 @@ export default function SearchOrder() {
   return (
     <div>
       <form onSubmit={handleSearchById}>
-        <input
-          placeholder="Search your order by Id#"
-          required
-          type="text"
-          name="orderId"
-          id="orderId"
-          value={orderId}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setOrderId(e.target.value)
-          }
-        />
-        <button type="submit">Search</button>
+        <div className=" flex flex-nowrap items-center rounded-md bg-orange-200 px-1 ">
+          <input
+            className="rounded-md bg-orange-200 p-1  text-zinc-900 focus:border focus:border-orange-400 focus:outline-none focus:ring-0 "
+            placeholder="Search your order by Id#"
+            required
+            type="text"
+            name="orderId"
+            id="orderId"
+            value={orderId}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setOrderId(e.target.value)
+            }
+          />
+          <button type="submit">
+            <SearchIcon />{" "}
+          </button>
+        </div>
       </form>
     </div>
   );
