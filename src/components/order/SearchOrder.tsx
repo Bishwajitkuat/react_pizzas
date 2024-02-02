@@ -14,9 +14,9 @@ export default function SearchOrder() {
   return (
     <div>
       <form onSubmit={handleSearchById}>
-        <div className=" flex flex-nowrap items-center rounded-md bg-orange-200 px-1 ">
+        <div className=" flex flex-nowrap items-center rounded-md bg-orange-200 p-1 ">
           <input
-            className="rounded-md bg-orange-200 p-1  text-zinc-900 focus:border focus:border-orange-400 focus:outline-none focus:ring-0 "
+            className="me-1 rounded-md bg-orange-200 p-1 text-zinc-900 ring-orange-400 focus:outline-none focus:ring-1"
             placeholder="Search your order by Id#"
             required
             type="text"
