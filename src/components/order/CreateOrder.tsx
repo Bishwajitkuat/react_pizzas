@@ -1,4 +1,5 @@
 import { Form, useActionData, useNavigation } from "react-router-dom";
+import { ActionReturnErrorType } from "../../lib/restaurant_api";
 
 const fakeCart = [
   {
@@ -28,7 +29,7 @@ export default function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   // accessing return data from action fuction
-  const actionData = useActionData() as { phone?: string };
+  const actionData = useActionData() as ActionReturnErrorType;
   const cart = fakeCart;
 
   return (

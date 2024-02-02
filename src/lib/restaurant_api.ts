@@ -15,6 +15,14 @@ export interface MenuType {
   soldOut: boolean;
 }
 
+// interface for return object from action fucntion in case of error
+
+export interface ActionReturnErrorType {
+  phone?: string;
+  customer?: string;
+  address?: string;
+}
+
 // this function call will fetch all data and return array of objects
 export async function getMenu(): Promise<MenuType[]> {
   const res = await fetch(`${API_URL}/menu`);
@@ -45,7 +53,7 @@ export async function createOrder({ request }) {
     };
 
     // form data validation and early return with errors object is validation fails
-    const errors = {};
+    const errors: ActionReturnErrorType = {};
     if (!isValidPhone(order.phone)) {
       errors.phone = "Please input a valid phone number!";
     }
