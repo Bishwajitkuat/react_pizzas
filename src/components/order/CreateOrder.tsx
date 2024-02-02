@@ -1,11 +1,5 @@
 import { Form, useNavigation } from "react-router-dom";
 
-// https://uibakery.io/regex-library/phone-number
-const isValidPhone = (str) =>
-  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str
-  );
-
 const fakeCart = [
   {
     pizzaId: 12,
@@ -33,7 +27,6 @@ const fakeCart = [
 export default function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
-  // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
 
   return (

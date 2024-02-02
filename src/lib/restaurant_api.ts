@@ -1,5 +1,9 @@
 const API_URL = "https://react-fast-pizza-api.onrender.com/api";
 import { redirect } from "react-router-dom";
+const isValidPhone = (str) =>
+  /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+    str
+  );
 
 // interface for the each menu object
 export interface MenuType {
@@ -39,6 +43,16 @@ export async function createOrder({ request }) {
       cart: JSON.parse(orderData.cart),
       priority: orderData.priority === "on",
     };
+
+    // form data validation and early return with errors object is validation fails
+    const errors = {};
+    if (!isValidPhone(order.phone)) {
+      errors.phone = "Please input a valid phone number!";
+    }
+    // all other validation can be here too, may be with zod later
+    // we will return errors object if it not empty
+    if (Object.keys(errors).length > 0) return errors;
+
     const res = await fetch(`${API_URL}/order`, {
       method: "POST",
       body: JSON.stringify(order),
