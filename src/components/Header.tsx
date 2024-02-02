@@ -4,12 +4,15 @@ import SearchOrder from "./order/SearchOrder";
 
 export default function Header() {
   return (
-    <header className="px-[5rem] py-[2rem]">
-      <nav className="flex justify-between items-center ">
-        <Link to="/">
-          <React_pizza_logo />
+    <header className="sticky top-0 bg-orange-400 px-[5rem] pb-2 pt-6">
+      <nav className="flex flex-nowrap items-center justify-between ">
+        <Link className="flex flex-nowrap items-center" to="/">
+          <React_pizza_logo />{" "}
+          <span className="text-[2rem] font-light tracking-widest">
+            React Pizza
+          </span>
         </Link>
-        <ul className="flex gap-3 text-[1.5rem] font-semibold tracking-widest">
+        <ul className="flex flex-nowrap  gap-8 text-[1.5rem] font-light tracking-widest">
           <li>
             <Link to="/menu">Menu</Link>
           </li>
