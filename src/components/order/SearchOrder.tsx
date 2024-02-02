@@ -14,7 +14,8 @@ export default function SearchOrder() {
     <div>
       <form onSubmit={handleSearchById}>
         <input
-          placeholder="Please input the order Id"
+          placeholder="Search your order by Id#"
+          required
           type="text"
           name="orderId"
           id="orderId"

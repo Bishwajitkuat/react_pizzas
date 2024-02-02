@@ -38,7 +38,6 @@ function Order() {
 
   return (
     <div>
-      <SearchOrder />
       <div>
         <h2>Status</h2>
 
