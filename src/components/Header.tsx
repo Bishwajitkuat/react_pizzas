@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React_pizza_logo from "./ui/icons/React_pizza_logo";
 import SearchOrder from "./order/SearchOrder";
+import CartIcon from "./ui/icons/CartIcon";
 
 export default function Header() {
   return (
@@ -16,12 +17,14 @@ export default function Header() {
           <li>
             <Link to="/menu">Menu</Link>
           </li>
-          <li>
-            <Link to="/cart">Cart</Link>
+          <li className="flex items-center justify-center">
+            <Link to="/cart">
+              <CartIcon />
+            </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/order/new">Order</Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
       <div className="mt-[1.2rem] flex justify-end">
