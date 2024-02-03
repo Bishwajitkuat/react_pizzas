@@ -33,49 +33,69 @@ export default function CreateOrder() {
   const cart = fakeCart;
 
   return (
-    <div>
+    <div className="mx-auto flex w-[75%] flex-col items-center gap-4 md:w-[45%]">
       <h2>Ready to order? Let's go!</h2>
-
-      <Form action="/order/new" method="POST">
-        <div>
-          <label>First Name</label>
-          <input type="text" name="customer" required />
+      <Form className="grid w-full gap-4" action="/order/new" method="POST">
+        <div className="grid">
+          <label>Name</label>
+          <input
+            className="rounded-md px-4 py-2 outline-none placeholder:text-zinc-400 focus:ring-2 focus:ring-orange-400 focus:ring-opacity-30"
+            type="text"
+            name="customer"
+            placeholder="your full name"
+            required
+          />
         </div>
 
-        <div>
+        <div className="grid">
           <label>Phone number</label>
-          <div>
-            <input type="tel" name="phone" required />
-          </div>
-          {actionData?.phone && <p>{actionData.phone}</p>}
+          <input
+            className="rounded-md px-4 py-2 outline-none placeholder:text-zinc-400 focus:ring-2 focus:ring-orange-400 focus:ring-opacity-30"
+            placeholder="mobile or phone number"
+            type="tel"
+            name="phone"
+            required
+          />
+          {actionData?.phone && (
+            <p className="text-red-500">{actionData.phone}</p>
+          )}
         </div>
 
-        <div>
+        <div className="grid">
           <label>Address</label>
-          <div>
-            <input type="text" name="address" required />
-          </div>
+
+          <input
+            className="rounded-md px-4 py-2 outline-none placeholder:text-zinc-400 focus:ring-2 focus:ring-orange-400 focus:ring-opacity-30"
+            placeholder="address"
+            type="text"
+            name="address"
+            required
+          />
         </div>
 
         <div>
           <input
+            className="me-1 rounded-md accent-orange-400 outline-none ring-red-400 focus:ring-1"
             type="checkbox"
             name="priority"
             id="priority"
             // value={withPriority}
             // onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label htmlFor="priority">Want to yo give your order priority?</label>
+          <label htmlFor="priority">Express delivary</label>
         </div>
 
-        <div>
+        <div className="text-center">
           <input
             type="hidden"
             id="cart"
             name="cart"
             value={JSON.stringify(cart)}
           />
-          <button disabled={isSubmitting}>
+          <button
+            className="w-full rounded-xl bg-orange-400  px-4 py-2 font-semibold shadow-md shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-orange-500 "
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Submitting....." : "Order now"}
           </button>
         </div>
