@@ -1,6 +1,6 @@
 import { Outlet, useNavigation } from "react-router-dom";
 import Header from "./Header";
-import Loader from "./ui/icons/Loader";
+import Loader from "./ui/Loader";
 import Footer from "./Footer";
 
 export default function Layout() {
@@ -10,7 +10,7 @@ export default function Layout() {
     <div className="flex h-screen w-screen flex-col">
       <Header />
       {isLoading && <Loader />}
-      <main className="flex-grow">
+      <main className="grow">
         <Outlet />
       </main>
       <Footer />
