@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router";
 import { calcMinutesLeft, formatCurrency, formatDate } from "../../lib/helpers";
-import SearchOrder from "./SearchOrder";
+import OrderItem from "./OrderItem";
 
 // Test ID: IIDSAT
 
@@ -35,19 +35,25 @@ function Order() {
     cart,
   } = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
-
   return (
-    <div>
-      <div>
-        <h2>Status</h2>
-
+    <div className="mx-auto my-4 flex flex-col gap-6 rounded-md bg-zinc-900/10 p-2 shadow-md shadow-zinc-900/30 md:my-8 md:w-[65%]  md:gap-8 md:p-8">
+      <div className="flex flex-wrap items-center justify-between gap-4 text-sm">
+        <h2 className="mb-2 text-xl font-semibold tracking-widest">
+          Order Id#: {id}
+        </h2>
         <div>
-          {priority && <span>Priority</span>}
-          <span>{status} order</span>
+          {priority && (
+            <span className="me-1 rounded-full bg-yellow-400 px-2 py-1 uppercase tracking-widest">
+              Priority
+            </span>
+          )}
+          <span className="me-1 rounded-full bg-green-500 px-2 py-1 uppercase tracking-widest">
+            {status}
+          </span>
         </div>
       </div>
-
-      <div>
+      <div className="rounded-md bg-slate-100 p-4 shadow-md shadow-zinc-200 duration-150 ease-in  hover:bg-orange-300 hover:shadow-orange-300/50">
+        <h2 className="mb-2 text-xl font-semibold tracking-widest">Status</h2>
         <p>
           {deliveryIn >= 0
             ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
@@ -55,8 +61,15 @@ function Order() {
         </p>
         <p>(Estimated delivery: {formatDate(estimatedDelivery)})</p>
       </div>
+      <ul className="rounded-md bg-slate-100 p-4 shadow-md shadow-zinc-200 duration-150 ease-in  hover:bg-orange-300 hover:shadow-orange-300/50">
+        <h2 className="text-xl font-semibold tracking-widest">Order</h2>
+        {cart.map((item) => (
+          <OrderItem key={item.pizzaId} item={item} />
+        ))}
+      </ul>
 
-      <div>
+      <div className="rounded-md bg-slate-100 p-4 shadow-md shadow-zinc-200 duration-150 ease-in  hover:bg-orange-300 hover:shadow-orange-300/50">
+        <h2 className="mb-2 text-xl font-semibold tracking-widest">Payment</h2>
         <p>Price pizza: {formatCurrency(orderPrice)}</p>
         {priority && <p>Price priority: {formatCurrency(priorityPrice)}</p>}
         <p>To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
