@@ -5,12 +5,12 @@ import MenuCard from "./MenuCard";
 export default function Menu() {
   const menusData = useLoaderData();
   return (
-    <div>
+    <ul className="grid justify-center gap-8 p-4 sm:grid-cols-2 md:grid-cols-3 md:p-[5rem]">
       {Array.isArray(menusData) &&
         menusData.map((pizza: MenuType) => (
           <MenuCard key={pizza.id} menu={pizza}></MenuCard>
         ))}
-    </div>
+    </ul>
   );
 }
 
