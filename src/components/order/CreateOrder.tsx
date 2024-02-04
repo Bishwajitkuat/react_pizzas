@@ -4,6 +4,13 @@ import PersonIcon from "../ui/icons/PersonIcon";
 import MapPinIcon from "../ui/icons/MapPinIcon";
 import PhoneIcon from "../ui/icons/PhoneIcon";
 import OrderItem from "./OrderItem";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, IRootState } from "../../store";
+import {
+  updateAddress,
+  updateContactNumber,
+  updateName,
+} from "../../features/userSlice";
 
 export const fakeCart = [
   {
@@ -30,6 +37,10 @@ export const fakeCart = [
 ];
 
 export default function CreateOrder() {
+  const { name, contactNumber, address } = useSelector(
+    (state: IRootState) => state.user,
+  );
+  const dispatch: AppDispatch = useDispatch();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   // accessing return data from action fuction
@@ -60,6 +71,8 @@ export default function CreateOrder() {
               type="text"
               name="customer"
               placeholder="full name"
+              value={name}
+              onChange={(e) => dispatch(updateName(e.target.value))}
               required
             />
           </div>
@@ -78,6 +91,8 @@ export default function CreateOrder() {
               placeholder="contact number"
               type="tel"
               name="phone"
+              value={contactNumber}
+              onChange={(e) => dispatch(updateContactNumber(e.target.value))}
               required
             />
           </div>
@@ -99,6 +114,8 @@ export default function CreateOrder() {
               placeholder="delivary address"
               type="text"
               name="address"
+              value={address}
+              onChange={(e) => dispatch(updateAddress(e.target.value))}
               required
             />
           </div>
@@ -110,8 +127,6 @@ export default function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
-            // value={withPriority}
-            // onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label htmlFor="priority">Express delivary</label>
         </div>
