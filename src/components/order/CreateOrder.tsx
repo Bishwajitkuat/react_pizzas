@@ -3,6 +3,7 @@ import { ActionReturnErrorType } from "../../lib/restaurant_api";
 import PersonIcon from "../ui/icons/PersonIcon";
 import MapPinIcon from "../ui/icons/MapPinIcon";
 import PhoneIcon from "../ui/icons/PhoneIcon";
+import OrderItem from "./OrderItem";
 
 export const fakeCart = [
   {
@@ -37,6 +38,14 @@ export default function CreateOrder() {
 
   return (
     <div className="mx-auto flex w-[95%] flex-col items-center gap-4 py-8 md:w-[45%]">
+      <ul className="mb-12 w-full rounded-md bg-slate-100 p-4 shadow-md shadow-zinc-200 duration-150 ease-in  hover:bg-orange-300 hover:shadow-orange-300/50">
+        <h2 className="mb-6 text-center text-xl font-semibold tracking-widest">
+          Order
+        </h2>
+        {cart.map((item) => (
+          <OrderItem key={item.pizzaId} item={item} />
+        ))}
+      </ul>
       <Form className="grid w-full gap-4" action="/order/new" method="POST">
         <div className="grid">
           <div className="flex items-center rounded-full bg-slate-100">
