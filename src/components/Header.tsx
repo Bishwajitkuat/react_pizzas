@@ -5,7 +5,7 @@ import CartIcon from "./ui/icons/CartIcon";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 bg-orange-400 p-4 md:px-[5rem] md:pb-2 md:pt-6">
+    <header className="sticky top-0 bg-orange-400/80 p-4 md:px-[5rem] md:pb-2 md:pt-6">
       <nav className="flex flex-nowrap items-center justify-between ">
         <Link className="flex flex-nowrap items-center" to="/">
           <React_pizza_logo />{" "}
