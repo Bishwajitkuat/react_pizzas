@@ -7,10 +7,10 @@ export default function Layout() {
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
   return (
-    <div className="flex h-screen w-screen flex-col">
+    <div className="flex h-screen w-screen min-w-[360px] flex-col">
       <Header />
       {isLoading && <Loader />}
-      <main className="grow">
+      <main className="grow bg-gradient-to-br from-zinc-300 to-zinc-900">
         <Outlet />
       </main>
       <Footer />
