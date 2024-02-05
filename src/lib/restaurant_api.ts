@@ -1,5 +1,7 @@
 const API_URL = "https://react-fast-pizza-api.onrender.com/api";
 import { redirect } from "react-router-dom";
+import store from "../store";
+import { removeFromOrder } from "../features/orderSlice";
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
     str,
@@ -108,6 +110,9 @@ export async function createOrder({ request }) {
 
     if (!res.ok) throw Error();
     const { data } = await res.json();
+    // resetting cart state in orderSlice when order is successfull.
+    // accessing stor to reset the cart in orderSlice outside of React component
+    store.dispatch(removeFromOrder());
     // redirecting to order page by redirect function profided by react-router
     return redirect(`/order/${data.id}`);
   } catch {
