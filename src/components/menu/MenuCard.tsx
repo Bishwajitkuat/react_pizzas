@@ -25,15 +25,25 @@ export default function MenuCard({ menu }: { menu: MenuType }) {
           {menu.name}
         </h2>
         <img
-          className=" shadow-md shadow-zinc-400"
+          className={
+            menu.soldOut
+              ? " shadow-md shadow-zinc-400 grayscale"
+              : " shadow-md shadow-zinc-400"
+          }
           src={menu.imageUrl}
           alt={menu.name}
         />
         <div className="flex items-center gap-2 px-2">
           <BankNoteIcon />
-          <p className="text-2xl font-semibold tracking-wider">
-            {menu.unitPrice}€
-          </p>
+          {menu.soldOut ? (
+            <p className="text-xl font-semibold uppercase text-red-500">
+              Sold out
+            </p>
+          ) : (
+            <p className="text-2xl font-semibold tracking-wider">
+              {menu.unitPrice}€
+            </p>
+          )}
         </div>
         <div className="flex grow  items-center gap-2 px-2">
           <div>
@@ -43,6 +53,7 @@ export default function MenuCard({ menu }: { menu: MenuType }) {
         </div>
         <div className="text-center">
           <button
+            disabled={menu.soldOut}
             className="w-full rounded-xl bg-orange-300 px-12 py-3 font-semibold uppercase tracking-widest shadow-md shadow-zinc-500 outline-none duration-200 ease-in hover:bg-orange-500 "
             onClick={handleAddToCart}
           >
