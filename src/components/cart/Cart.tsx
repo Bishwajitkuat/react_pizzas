@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
-import { fakeCart } from "../order/CreateOrder";
 import CartItem from "./CartItem";
+import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "../../store";
+import { clearCart } from "../../features/cartSlice";
 
 export default function Cart() {
-  const totalPrice: number = 100;
-  const cartItems = fakeCart;
+  const dispatch = useDispatch();
+  const { cart } = useSelector((state: IRootState) => state.cart);
+  const totalPrice: number = cart.reduce(
+    (acc, item) => acc + item.totalPrice,
+    0,
+  );
   return (
     <div className="flex justify-center">
       <div className="m-2 rounded-md bg-zinc-900/10 p-2 shadow-md shadow-zinc-900/30 md:m-8 md:w-[65%] md:p-8">
@@ -14,12 +20,15 @@ export default function Cart() {
           <p>Total: {totalPrice}</p>
         </div>
         <ul className="flex flex-col gap-4 border-b border-t border-zinc-400 py-6">
-          {cartItems.map((cartItem) => (
-            <CartItem key={cartItem.pizzaId} cartItem={cartItem} />
+          {cart.map((cartItem) => (
+            <CartItem key={cartItem.id} cartItem={cartItem} />
           ))}
         </ul>
         <div className="flex justify-end gap-2 px-2 py-6 text-right uppercase md:tracking-widest">
-          <button className="min-h-[3rem] rounded-xl bg-orange-300 px-4 py-2  shadow-md shadow-zinc-500 outline-none duration-200 ease-in hover:bg-orange-500 hover:shadow-orange-500/50  md:w-[20%] ">
+          <button
+            className="min-h-[3rem] rounded-xl bg-orange-300 px-4 py-2  shadow-md shadow-zinc-500 outline-none duration-200 ease-in hover:bg-orange-500 hover:shadow-orange-500/50  md:w-[20%]"
+            onClick={() => dispatch(clearCart())}
+          >
             Clear Cart
           </button>
           <button className=" min-h-[3rem] rounded-xl bg-orange-300 px-4  py-2  shadow-md shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-orange-500 hover:shadow-orange-500/50 md:w-[20%] ">
