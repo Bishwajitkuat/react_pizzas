@@ -41,13 +41,13 @@ export default function Cart() {
         )}
         <div className="flex justify-end gap-2 px-2 py-6 text-right uppercase md:tracking-widest">
           <button
-            className="min-h-[3rem] rounded-xl bg-orange-300 px-4 py-2  shadow-md shadow-zinc-500 outline-none duration-200 ease-in hover:bg-orange-500 hover:shadow-orange-500/50  md:w-[20%]"
+            className="min-h-[3rem] rounded-xl bg-orange-300 px-4 py-2 uppercase  shadow-md shadow-zinc-500 outline-none duration-200 ease-in hover:bg-orange-500 hover:shadow-orange-500/50"
             onClick={() => dispatch(clearCart())}
           >
             Clear Cart
           </button>
           <button
-            className=" min-h-[3rem] rounded-xl bg-orange-300 px-4  py-2  shadow-md shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-orange-500 hover:shadow-orange-500/50 md:w-[20%] "
+            className="min-h-[3rem] rounded-xl bg-orange-300 px-4 py-2  uppercase  shadow-md shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-orange-500 hover:shadow-orange-500/50"
             onClick={handleCheckout}
           >
             Checkout
