@@ -18,6 +18,7 @@ import {
 } from "../../features/userSlice";
 import { removeFromOrder } from "../../features/orderSlice";
 import { addCartAsArrayToCart } from "../../features/cartSlice";
+import NoItemInCart from "../cart/NoItemInCart";
 
 export default function CreateOrder() {
   const { name, contactNumber, address } = useSelector(
@@ -45,17 +46,26 @@ export default function CreateOrder() {
     // redirecting to menu page
     navigate("/menu");
   };
+  const cartTotal = cart.reduce((acc, item) => acc + item.totalPrice, 0);
 
   return (
     <div className="mx-auto flex w-[95%] flex-col items-center gap-4 py-8 md:w-[45%]">
-      <ul className="mb-12 w-full rounded-md bg-slate-100 p-4 shadow-md shadow-zinc-200 duration-150 ease-in  hover:bg-orange-300 hover:shadow-orange-300/50">
-        <h2 className="mb-6 text-center text-xl font-semibold tracking-widest">
-          Order
-        </h2>
-        {cart.map((item) => (
-          <OrderItem key={item.id} item={item} />
-        ))}
-      </ul>
+      {cart.length > 0 ? (
+        <ul className="mb-12 w-full rounded-md bg-slate-100 p-4 shadow-md shadow-zinc-200 duration-150 ease-in  hover:bg-orange-300 hover:shadow-orange-300/50">
+          <li className="mb-6 text-center text-xl font-semibold tracking-widest">
+            Order
+          </li>
+          {cart.map((item) => (
+            <OrderItem key={item.id} item={item} />
+          ))}
+          <li className="mt-2 flex justify-between px-2 text-xl font-semibold">
+            <p>Total</p>
+            <p>{cartTotal}€</p>
+          </li>
+        </ul>
+      ) : (
+        <NoItemInCart />
+      )}
       <Form className="grid w-full gap-4" action="/order/new" method="POST">
         <div className="grid">
           <div className="flex items-center rounded-full bg-slate-100">

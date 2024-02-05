@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../store";
 import { clearCart } from "../../features/cartSlice";
 import { addToOrder } from "../../features/orderSlice";
+import NoItemInCart from "./NoItemInCart";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -29,11 +30,15 @@ export default function Cart() {
           <h1>Shopping Cart</h1>
           <p>Total: {totalPrice}</p>
         </div>
-        <ul className="flex flex-col gap-4 border-b border-t border-zinc-400 py-6">
-          {cart.map((cartItem) => (
-            <CartItem key={cartItem.id} cartItem={cartItem} />
-          ))}
-        </ul>
+        {cart.length > 0 ? (
+          <ul className="flex flex-col gap-4 border-b border-t border-zinc-400 py-6">
+            {cart.map((cartItem) => (
+              <CartItem key={cartItem.id} cartItem={cartItem} />
+            ))}
+          </ul>
+        ) : (
+          <NoItemInCart />
+        )}
         <div className="flex justify-end gap-2 px-2 py-6 text-right uppercase md:tracking-widest">
           <button
             className="min-h-[3rem] rounded-xl bg-orange-300 px-4 py-2  shadow-md shadow-zinc-500 outline-none duration-200 ease-in hover:bg-orange-500 hover:shadow-orange-500/50  md:w-[20%]"
