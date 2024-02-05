@@ -12,40 +12,16 @@ import {
   updateName,
 } from "../../features/userSlice";
 
-export const fakeCart = [
-  {
-    pizzaId: 12,
-    name: "Mediterranean",
-    quantity: 2,
-    unitPrice: 16,
-    totalPrice: 32,
-  },
-  {
-    pizzaId: 6,
-    name: "Vegetale",
-    quantity: 1,
-    unitPrice: 13,
-    totalPrice: 13,
-  },
-  {
-    pizzaId: 11,
-    name: "Spinach and Mushroom",
-    quantity: 1,
-    unitPrice: 15,
-    totalPrice: 15,
-  },
-];
-
 export default function CreateOrder() {
   const { name, contactNumber, address } = useSelector(
     (state: IRootState) => state.user,
   );
+  const { cart } = useSelector((state: IRootState) => state.order);
   const dispatch: AppDispatch = useDispatch();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   // accessing return data from action fuction
   const actionData = useActionData() as ActionReturnErrorType;
-  const cart = fakeCart;
 
   return (
     <div className="mx-auto flex w-[95%] flex-col items-center gap-4 py-8 md:w-[45%]">
@@ -54,7 +30,7 @@ export default function CreateOrder() {
           Order
         </h2>
         {cart.map((item) => (
-          <OrderItem key={item.pizzaId} item={item} />
+          <OrderItem key={item.id} item={item} />
         ))}
       </ul>
       <Form className="grid w-full gap-4" action="/order/new" method="POST">
