@@ -1,4 +1,9 @@
-import { Form, useActionData, useNavigation } from "react-router-dom";
+import {
+  Form,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import { ActionReturnErrorType } from "../../lib/restaurant_api";
 import PersonIcon from "../ui/icons/PersonIcon";
 import MapPinIcon from "../ui/icons/MapPinIcon";
@@ -11,6 +16,7 @@ import {
   updateContactNumber,
   updateName,
 } from "../../features/userSlice";
+import { removeFromOrder } from "../../features/orderSlice";
 
 export default function CreateOrder() {
   const { name, contactNumber, address } = useSelector(
@@ -19,9 +25,22 @@ export default function CreateOrder() {
   const { cart } = useSelector((state: IRootState) => state.order);
   const dispatch: AppDispatch = useDispatch();
   const navigation = useNavigation();
+  const navigate = useNavigate();
   const isSubmitting = navigation.state === "submitting";
   // accessing return data from action fuction
   const actionData = useActionData() as ActionReturnErrorType;
+
+  const handleGoBackToCart = () => {
+    // setting cart state in cartSlice
+    // reseting cart state in orderSlice
+    // riderecting to cart route
+  };
+  const handleCancleOrder = () => {
+    // resetting cart state in orderSlice
+    dispatch(removeFromOrder());
+    // redirecting to menu page
+    navigate("/menu");
+  };
 
   return (
     <div className="mx-auto flex w-[95%] flex-col items-center gap-4 py-8 md:w-[45%]">
@@ -114,12 +133,31 @@ export default function CreateOrder() {
             name="cart"
             value={JSON.stringify(cart)}
           />
-          <button
-            className="min-h-[3rem] w-full rounded-full bg-orange-300 px-4  py-2 font-semibold uppercase shadow-sm shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-orange-500 "
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Submitting....." : "Order now"}
-          </button>
+          <div className="flex gap-2">
+            <button
+              className="min-h-[3rem] w-full rounded-full bg-orange-300 px-4  py-2 font-semibold uppercase shadow-sm shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-orange-500 "
+              disabled={isSubmitting}
+              type="button"
+              onClick={handleGoBackToCart}
+            >
+              Cart
+            </button>
+            <button
+              className="min-h-[3rem] w-full rounded-full bg-orange-300 px-4  py-2 font-semibold uppercase shadow-sm shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-red-500 "
+              disabled={isSubmitting}
+              type="button"
+              onClick={handleCancleOrder}
+            >
+              Cancle
+            </button>
+            <button
+              className="min-h-[3rem] w-full rounded-full bg-orange-300 px-4  py-2 font-semibold uppercase shadow-sm shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-green-500 "
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting....." : "Order"}
+            </button>
+          </div>
         </div>
       </Form>
     </div>
