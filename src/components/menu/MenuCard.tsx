@@ -1,10 +1,22 @@
+import { useDispatch } from "react-redux";
 import { MenuType } from "../../lib/restaurant_api";
 import BankNoteIcon from "../ui/icons/BankNoteIcon";
 import RecipeIcon from "../ui/icons/RecipeIcon";
+import { CartItemType, addToCart } from "../../features/cartSlice";
 
 export default function MenuCard({ menu }: { menu: MenuType }) {
-  const handleAddToCart = (id) => {
-    console.log(id);
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    const cartItem: CartItemType = {
+      id: menu.id,
+      name: menu.name,
+      imageUrl: menu.imageUrl,
+      unitPrice: menu.unitPrice,
+      quantity: 1,
+      // this price will not be used in calculation but it needs to be in the object
+      totalPrice: menu.unitPrice,
+    };
+    dispatch(addToCart(cartItem));
   };
   return (
     <li className="rounded-md bg-gradient-to-br from-orange-400 via-[#983cfb]/50 to-[#3fb02a] p-[1px] shadow-lg shadow-zinc-400 ">
@@ -32,7 +44,7 @@ export default function MenuCard({ menu }: { menu: MenuType }) {
         <div className="text-center">
           <button
             className="w-full rounded-xl bg-orange-300 px-12 py-3 font-semibold uppercase tracking-widest shadow-md shadow-zinc-500 outline-none duration-200 ease-in hover:bg-orange-500 "
-            onClick={() => handleAddToCart(menu.id)}
+            onClick={handleAddToCart}
           >
             Add to cart
           </button>
