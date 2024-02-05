@@ -5,7 +5,7 @@ export default function OrderItem({ item }) {
       <h3>
         {name} x{quantity}
       </h3>
-      <p>{totalPrice}€</p>
+      <p>{totalPrice.toFixed(2)}€</p>
     </li>
   );
 }

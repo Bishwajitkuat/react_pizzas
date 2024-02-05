@@ -41,7 +41,7 @@ export default function MenuCard({ menu }: { menu: MenuType }) {
             </p>
           ) : (
             <p className="text-2xl font-semibold tracking-wider">
-              {menu.unitPrice}€
+              {menu.unitPrice.toFixed(2)}€
             </p>
           )}
         </div>

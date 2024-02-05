@@ -28,7 +28,7 @@ export default function Cart() {
         <Link to="/menu"> Menu </Link>
         <div className="mb-4 flex w-full justify-between py-4 text-xl">
           <h1>Shopping Cart</h1>
-          <p>Total: {totalPrice}</p>
+          <p>Total: {totalPrice.toFixed(2)}€</p>
         </div>
         {cart.length > 0 ? (
           <ul className="flex flex-col gap-4 border-b border-t border-zinc-400 py-6">

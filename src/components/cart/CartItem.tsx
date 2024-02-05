@@ -10,9 +10,9 @@ export default function CartItem({ cartItem }) {
   const dispatch = useDispatch();
   const { id, name, quantity, unitPrice, totalPrice, imageUrl } = cartItem;
   return (
-    <li className="grid w-full grid-cols-5 items-center gap-1 rounded-md bg-slate-100 p-3 shadow-md shadow-zinc-200 duration-150 ease-in hover:bg-orange-300  hover:shadow-orange-300/50 md:gap-4 md:p-4">
+    <li className="grid w-full grid-cols-4 items-center gap-1 rounded-md bg-slate-100 p-3 text-sm shadow-md shadow-zinc-200 duration-150 ease-in hover:bg-orange-300  hover:shadow-orange-300/50 md:gap-4 md:p-4">
       <img className=" rounded-md" src={imageUrl} alt={name} />
-      <div className="col-span-2">
+      <div className="col-span-1">
         <h2 className="tracking-widest md:text-xl">{name}</h2>
         <p>{unitPrice}€</p>
       </div>
@@ -33,12 +33,12 @@ export default function CartItem({ cartItem }) {
           -
         </button>
       </div>
-      <div className="grid grid-cols-2 items-center justify-center gap-2 justify-self-end">
+      <div className="flex flex-nowrap items-center justify-end gap-2 justify-self-end">
         <p className="md:text-xl md:font-bold md:tracking-widest">
-          {totalPrice}€
+          {totalPrice.toFixed(2)}€
         </p>
         <button
-          className="ms-2 duration-200 ease-in hover:scale-105"
+          className="duration-200 ease-in hover:scale-105"
           onClick={() => dispatch(removeFromCart(id))}
         >
           <TrashCanIcon />
