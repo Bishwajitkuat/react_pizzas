@@ -9,7 +9,7 @@ export interface CartItemType {
   totalPrice: number;
 }
 
-interface CartInitialStateType {
+export interface CartInitialStateType {
   cart: CartItemType[];
 }
 
