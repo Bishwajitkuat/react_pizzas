@@ -54,7 +54,11 @@ export default function MenuCard({ menu }: { menu: MenuType }) {
         <div className="text-center">
           <button
             disabled={menu.soldOut}
-            className="w-full rounded-xl bg-orange-300 px-12 py-3 font-semibold uppercase tracking-widest shadow-md shadow-zinc-500 outline-none duration-200 ease-in hover:bg-orange-500 "
+            className={
+              menu.soldOut
+                ? "w-full rounded-b-md bg-gray-400 px-12 py-3 font-semibold uppercase tracking-widest shadow-md shadow-zinc-500 outline-none "
+                : "w-full  rounded-b-md bg-orange-300 px-12 py-3 font-semibold uppercase tracking-widest shadow-md shadow-zinc-500 outline-none duration-200 ease-in hover:bg-orange-500 "
+            }
             onClick={handleAddToCart}
           >
             Add to cart
