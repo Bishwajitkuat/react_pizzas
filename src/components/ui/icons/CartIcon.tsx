@@ -1,7 +1,11 @@
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../store";
+
 function CartIcon() {
   // data will come form redux
-  const itemNumver: number = 0;
-  const showItemNumber: boolean = itemNumver > 0 ? true : false;
+  const { cart } = useSelector((state: IRootState) => state.cart);
+  const itemNumver: number = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const showItemNumber: boolean = cart.length > 0 ? true : false;
   return (
     <div className="relative">
       <svg
