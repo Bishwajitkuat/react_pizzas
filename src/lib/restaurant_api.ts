@@ -2,7 +2,7 @@ const API_URL = "https://react-fast-pizza-api.onrender.com/api";
 import { redirect } from "react-router-dom";
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str
+    str,
   );
 
 // interface for the each menu object
@@ -13,6 +13,15 @@ export interface MenuType {
   imageUrl: string;
   ingredients: string[];
   soldOut: boolean;
+}
+
+// interface for item in cart array for post request to create order
+interface CartItemTypeForCreateOrder {
+  pizzaId: string;
+  name: string;
+  unitPrice: number;
+  quantity: number;
+  totalPrice: number;
 }
 
 // interface for return object from action fucntion in case of error
@@ -46,9 +55,28 @@ export async function createOrder({ request }) {
   try {
     const formData = await request.formData();
     const orderData = Object.fromEntries(formData);
+    // cart item object comming from form data is not same as the api expects
+    // we need to restructure the cart item before making the post request.
+    const orderCartForPost = JSON.parse(orderData.cart).reduce(
+      (
+        acc: CartItemTypeForCreateOrder[],
+        item,
+      ): CartItemTypeForCreateOrder[] => {
+        const cartItem = {
+          pizzaId: item.id,
+          name: item.name,
+          quantity: item.quantity,
+          unitPrice: item.unitPrice,
+          totalPrice: item.totalPrice,
+        };
+        return [...acc, cartItem];
+      },
+      [],
+    );
+    // structuring the oder object as expected by the api
     const order = {
       ...orderData,
-      cart: JSON.parse(orderData.cart),
+      cart: orderCartForPost,
       priority: orderData.priority === "on",
     };
 
