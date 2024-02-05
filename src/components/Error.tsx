@@ -1,10 +1,14 @@
 import { useNavigate, useRouteError } from "react-router";
+interface ErrorType {
+  data?: string;
+  message?: string;
+}
 
 export default function Error() {
   const navigate = useNavigate();
-  const error = useRouteError();
+  const error = useRouteError() as ErrorType;
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
+    <div className="flex h-screen w-screen flex-col items-center justify-center">
       <h1 className="text-[1.5rem]">Something went wrong</h1>
       {/* some error object kees message in data property */}
       {error?.data && <p className="text-red-500">{error?.data}</p>}
