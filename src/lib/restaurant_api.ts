@@ -23,7 +23,14 @@ interface CartItemTypeForCreateOrder {
   quantity: number;
   totalPrice: number;
 }
-
+// interface for order object for post request to create order
+interface OrderTypeForCreateOrder {
+  customer: string;
+  address: string;
+  phone: string;
+  priority: boolean;
+  cart: CartItemTypeForCreateOrder[];
+}
 // interface for return object from action fucntion in case of error
 
 export interface ActionReturnErrorType {
@@ -74,12 +81,14 @@ export async function createOrder({ request }) {
       [],
     );
     // structuring the oder object as expected by the api
-    const order = {
-      ...orderData,
+    const order: OrderTypeForCreateOrder = {
+      // if i use spread operator, typescript can not ditect the properties
+      customer: orderData.customer,
+      address: orderData.address,
+      phone: orderData.phone,
       cart: orderCartForPost,
       priority: orderData.priority === "on",
     };
-
     // form data validation and early return with errors object is validation fails
     const errors: ActionReturnErrorType = {};
     if (!isValidPhone(order.phone)) {
@@ -106,18 +115,18 @@ export async function createOrder({ request }) {
   }
 }
 // updating a order wich needs id and updated object
-export async function updateOrder(id: number, updateObj: MenuType) {
-  try {
-    const res = await fetch(`${API_URL}/order/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify(updateObj),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+// export async function updateOrder(id: number, updateObj: MenuType) {
+//   try {
+//     const res = await fetch(`${API_URL}/order/${id}`, {
+//       method: "PATCH",
+//       body: JSON.stringify(updateObj),
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
 
-    if (!res.ok) throw Error();
-  } catch (err) {
-    throw Error("Failed updating your order");
-  }
-}
+//     if (!res.ok) throw Error();
+//   } catch (err) {
+//     throw Error("Failed updating your order");
+//   }
+// }
