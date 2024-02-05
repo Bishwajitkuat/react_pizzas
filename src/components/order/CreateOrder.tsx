@@ -17,6 +17,7 @@ import {
   updateName,
 } from "../../features/userSlice";
 import { removeFromOrder } from "../../features/orderSlice";
+import { addCartAsArrayToCart } from "../../features/cartSlice";
 
 export default function CreateOrder() {
   const { name, contactNumber, address } = useSelector(
@@ -32,8 +33,11 @@ export default function CreateOrder() {
 
   const handleGoBackToCart = () => {
     // setting cart state in cartSlice
+    dispatch(addCartAsArrayToCart(cart));
     // reseting cart state in orderSlice
-    // riderecting to cart route
+    dispatch(removeFromOrder());
+    // redirecting to cart route
+    navigate("/cart");
   };
   const handleCancleOrder = () => {
     // resetting cart state in orderSlice
