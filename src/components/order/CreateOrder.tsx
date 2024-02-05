@@ -165,9 +165,13 @@ export default function CreateOrder() {
               Cancle
             </button>
             <button
-              className="min-h-[3rem] w-full rounded-full bg-orange-300 px-4  py-2 font-semibold uppercase shadow-sm shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-green-500 "
+              className={
+                cart.length < 1
+                  ? "min-h-[3rem] w-full rounded-full bg-gray-500 px-4  py-2 font-semibold uppercase shadow-sm shadow-zinc-500 outline-none"
+                  : "min-h-[3rem] w-full rounded-full bg-orange-300 px-4  py-2 font-semibold uppercase shadow-sm shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-green-500"
+              }
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || cart.length < 1}
             >
               {isSubmitting ? "Submitting....." : "Order"}
             </button>
