@@ -19,8 +19,10 @@ import {
 import { removeFromOrder } from "../../features/orderSlice";
 import { addCartAsArrayToCart } from "../../features/cartSlice";
 import NoItemInCart from "../cart/NoItemInCart";
+import { useState } from "react";
 
 export default function CreateOrder() {
+  const [expressDelivery, setExpressDelivery] = useState<boolean>(false);
   const { name, contactNumber, address } = useSelector(
     (state: IRootState) => state.user,
   );
@@ -47,20 +49,27 @@ export default function CreateOrder() {
     navigate("/menu");
   };
   const cartTotal = cart.reduce((acc, item) => acc + item.totalPrice, 0);
+  const grandTotal = cartTotal * (expressDelivery ? 1.2 : 1);
 
   return (
     <div className="mx-auto flex w-[95%] flex-col items-center gap-4 py-8 md:w-[45%]">
       {cart.length > 0 ? (
-        <ul className="mb-12 w-full rounded-md bg-slate-100 p-4 shadow-md shadow-zinc-200 duration-150 ease-in  hover:bg-orange-300 hover:shadow-orange-300/50">
-          <li className="mb-6 text-center text-xl font-semibold tracking-widest">
-            Order
+        <ul className="mb-12 w-full rounded-md bg-slate-100 p-4 shadow-md shadow-zinc-200 ">
+          <li className="mb-8 text-center text-xl font-semibold uppercase tracking-widest">
+            Order detail
           </li>
           {cart.map((item) => (
             <OrderItem key={item.id} item={item} />
           ))}
+          {expressDelivery && (
+            <li className="flex justify-between border-b border-t border-zinc-500/20 px-2 py-2">
+              <p>Express delivery fee</p>
+              <p>{(cartTotal * 0.2).toFixed(2)}€</p>
+            </li>
+          )}
           <li className="mt-2 flex justify-between px-2 text-xl font-semibold">
             <p>Total</p>
-            <p>{cartTotal}€</p>
+            <p>{grandTotal.toFixed(2)}€</p>
           </li>
         </ul>
       ) : (
@@ -136,8 +145,12 @@ export default function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
+            checked={expressDelivery}
+            onChange={(e) => setExpressDelivery(e.target.checked)}
           />
-          <label htmlFor="priority">Express delivary</label>
+          <label htmlFor="priority">
+            Express delivary (20% of the cart value)
+          </label>
         </div>
 
         <div className="text-center">
