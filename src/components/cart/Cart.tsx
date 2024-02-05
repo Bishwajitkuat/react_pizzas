@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../store";
 import { clearCart } from "../../features/cartSlice";
+import { addToOrder } from "../../features/orderSlice";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -11,6 +12,15 @@ export default function Cart() {
     (acc, item) => acc + item.totalPrice,
     0,
   );
+  const navigate = useNavigate();
+  const handleCheckout = () => {
+    // sending cart item info to order slice
+    dispatch(addToOrder(cart));
+    // clear cart
+    dispatch(clearCart());
+    // redirect to order route
+    navigate("/order/new");
+  };
   return (
     <div className="flex justify-center">
       <div className="m-2 rounded-md bg-zinc-900/10 p-2 shadow-md shadow-zinc-900/30 md:m-8 md:w-[65%] md:p-8">
@@ -31,8 +41,11 @@ export default function Cart() {
           >
             Clear Cart
           </button>
-          <button className=" min-h-[3rem] rounded-xl bg-orange-300 px-4  py-2  shadow-md shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-orange-500 hover:shadow-orange-500/50 md:w-[20%] ">
-            Order Pizzas
+          <button
+            className=" min-h-[3rem] rounded-xl bg-orange-300 px-4  py-2  shadow-md shadow-zinc-500 outline-none duration-200 ease-in  hover:bg-orange-500 hover:shadow-orange-500/50 md:w-[20%] "
+            onClick={handleCheckout}
+          >
+            Checkout
           </button>
         </div>
       </div>
