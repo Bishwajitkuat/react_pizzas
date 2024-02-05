@@ -57,6 +57,11 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.cart = [];
     },
+    // will set cart state as array
+    // coming back from order to cart
+    addCartAsArrayToCart(state, action) {
+      state.cart = action.payload;
+    },
   },
 });
 
@@ -66,6 +71,7 @@ export const {
   removeOneFromCart,
   removeFromCart,
   clearCart,
+  addCartAsArrayToCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
