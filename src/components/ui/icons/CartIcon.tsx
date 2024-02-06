@@ -23,7 +23,7 @@ function CartIcon() {
         />
       </svg>
       {showItemNumber && (
-        <p className="absolute bottom-6 left-4 h-[2rem] w-[2rem] rounded-full bg-zinc-800 text-center text-orange-100">
+        <p className="absolute bottom-6 left-4 h-[2rem] w-[2rem] rounded-full bg-emerald-400 text-center font-bold text-zinc-950">
           {itemNumver}
         </p>
       )}

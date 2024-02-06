@@ -22,12 +22,9 @@ export default function Header() {
               <CartIcon />
             </Link>
           </li>
-          {/* <li>
-            <Link to="/order/new">Order</Link>
-          </li> */}
         </ul>
       </nav>
-      <div className="mt-3 flex justify-end md:mt-[1.2rem]">
+      <div className="mt-2 flex justify-end">
         <SearchOrder />
       </div>
     </header>
