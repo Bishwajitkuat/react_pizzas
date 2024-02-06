@@ -2,7 +2,11 @@
 
 ## Description
 
-An website for odering pizzas. User can add pizzas into cart and adjust item numbers from cart. Finaly place an order. After placing a order, users will be redirected to order status page. I have used "react-fast-pizza-api" API for backend functionalities.
+An website for odering pizzas. User can add pizzas into cart and adjust item numbers from cart. Finaly place an order. After placing a order, users will be redirected to order status page. I have used "react-fast-pizza-api" API for backend functionalities. The app is hosted at Vercel.
+
+## Live website
+
+<a href="https://react-pizzas-bisso.vercel.app/" target="_blanck">https://react-pizzas-bisso.vercel.app/</a>
 
 ## Technologies
 
@@ -18,7 +22,7 @@ An website for odering pizzas. User can add pizzas into cart and adjust item num
 
 Bishwajit Das (Bisso)
 
-## Screen Shorts
+## Screenshots
 
 ### Home page
 
