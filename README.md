@@ -2,7 +2,7 @@
 
 ## Description
 
-An website for odering pizzas. User can add pizzas into cart and adjust item numbers from cart. Finaly place an order. After placing a order, users will be redirected to order status page. I have used "react-fast-pizza-api" API for backend functionalities. The app is hosted at Vercel.
+A website for ordering pizzas. Users can add pizzas to the cart and adjust item numbers from the cart. Finally, place an order. After placing an order, users will be redirected to the order status page. I have used "react-fast-pizza-api" API for backend functionalities. The app is hosted at Vercel.
 
 ## Live website
 
